@@ -587,6 +587,14 @@
                                 <p>Informational</p>
                             </a>
                         </li>
+                        <?php if (session()->get('isLoggedIn')) : ?>
+                            <li class="nav-item">
+                                <a href="<?= base_url('logout') ?>" class="nav-link">
+                                    <i class="nav-icon fa fa-sign-out"></i>
+                                    <p>Keluar</p>
+                                </a>
+                            </li>
+                        <?php endif; ?>
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
