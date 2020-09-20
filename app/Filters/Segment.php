@@ -10,6 +10,8 @@ class Segment implements FilterInterface
 {
     public function before(RequestInterface $request, $arguments = null)
     {
+        // Jika jumlah segment uri >= 2 maka segment ke 2
+        // diganti dengan karakter `/`
         $uri = service('uri');
         if ($uri->getTotalSegments() >= 2) {
             $segment = '/';
