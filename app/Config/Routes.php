@@ -44,6 +44,12 @@ $routes->match(['get', 'post'], 'user/add', 'User::add');
 $routes->delete('user/(:num)', 'User::delete/$1');
 $routes->get('user/edit/(:segment)', 'User::edit/$1');
 
+// Trash admin panel
+$routes->get('trash', 'Trash::index');
+$routes->match(['get', 'post'], 'trash/add', 'Trash::add');
+$routes->delete('trash/(:num)', 'Trash::delete/$1');
+$routes->get('trash/edit/(:segment)', 'Trash::edit/$1');
+
 /**
  * --------------------------------------------------------------------
  * Additional Routing

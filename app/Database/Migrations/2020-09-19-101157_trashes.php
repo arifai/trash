@@ -17,9 +17,9 @@ class Trashes extends Migration
 			],
 			'weight' => [
 				'type' => 'DECIMAL',
-				'constraint' => '3,2'
+				'constraint' => '6,2'
 			],
-			'trash_category_id' => [
+			'category_id' => [
 				'type' => 'INT',
 				'constraint' => 5,
 				'unsigned' => true
@@ -45,7 +45,7 @@ class Trashes extends Migration
 		]);
 
 		$this->forge->addPrimaryKey('id');
-		$this->forge->addForeignKey('trash_category_id', 'categories', 'id', 'CASCADE', 'CASCADE');
+		$this->forge->addForeignKey('category_id', 'categories', 'id', 'CASCADE', 'CASCADE');
 		$this->forge->addForeignKey('floor_id', 'floors', 'id', 'CASCADE', 'CASCADE');
 		$this->forge->addForeignKey('user_id', 'users', 'user_id', 'CASCADE', 'CASCADE');
 		$this->forge->addForeignKey('shift_id', 'shifts', 'id', 'CASCADE', 'CASCADE');

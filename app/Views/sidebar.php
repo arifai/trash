@@ -547,6 +547,12 @@
                         <p>Pengguna</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="<?= base_url('trash') ?>" class="nav-link">
+                        <i class="nav-icon fa fa-trash"></i>
+                        <p>Sampah</p>
+                    </a>
+                </li>
                 <?php if (session()->get('isLoggedIn')) : ?>
                     <li class="nav-item">
                         <a href="<?= base_url('logout') ?>" class="nav-link">
