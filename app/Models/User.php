@@ -45,6 +45,11 @@ class User extends Model
         return $data;
     }
 
+    /**
+     * Mendatapkan data dari tabel `user` 
+     * yang sudah dijoin/digabungkan dengan 
+     * tabel `roles_level`
+     */
     public function getData()
     {
         return $this->db->table('users')
@@ -52,16 +57,25 @@ class User extends Model
             ->orderBy('user_id', 'ASC')->get()->getResultArray();
     }
 
-    public function delData($id)
+    /**
+     * Menghapus data berdasarkan `user_id`
+     */
+    public function delData(int $id)
     {
         $this->db->table('users')->delete(['user_id' => $id]);
     }
 
-    public function getDataById($id)
+    /**
+     * Mendapatkan data berdasarkan `user_id`
+     */
+    public function getDataById(int $id)
     {
         return $this->where(['user_id' => $id])->first();
     }
 
+    /**
+     * Update data berdasarkan `user_id`
+     */
     public function updateData(int $id, array $data)
     {
         extract($data);

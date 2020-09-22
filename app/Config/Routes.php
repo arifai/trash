@@ -35,8 +35,10 @@ $routes->setAutoRoute(true);
 $routes->match(['get', 'post'], '/', 'Auth::index');
 $routes->get('logout', 'Auth::logout');
 
-// Admin panel
+// Home admin panel
 $routes->get('dashboard', 'Dashboard::index');
+
+// User admin panel
 $routes->get('user', 'User::index');
 $routes->match(['get', 'post'], 'user/add', 'User::add');
 $routes->delete('user/(:num)', 'User::delete/$1');

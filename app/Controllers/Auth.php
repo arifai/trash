@@ -2,15 +2,19 @@
 
 namespace App\Controllers;
 
-use App\Models\User;
+use App\Models\User as ModelUser;
 
 class Auth extends BaseController
 {
 	public function __construct()
 	{
 		helper('form');
+		$this->UserModel = new ModelUser();
 	}
 
+	/**
+	 * Menampilkan halaman `index` dari `/auth/login`
+	 */
 	public function index()
 	{
 		$data = [];
@@ -41,10 +45,8 @@ class Auth extends BaseController
 			if (!$validate) {
 				$data['validation'] = $this->validator;
 			} else {
-				$model = new User();
-
 				$getEmployeeId = $this->request->getVar('employee_id');
-				$user = $model->where('employee_id', $getEmployeeId)->first();
+				$user = $this->UserModel->where('employee_id', $getEmployeeId)->first();
 				$this->_setSession($user);
 
 				return redirect()->to('dashboard');
@@ -54,6 +56,10 @@ class Auth extends BaseController
 		return view('auth/login', $data);
 	}
 
+	/**
+	 * Untuk menyimpan `session` di dalam browser.
+	 * Method ini bersifat private
+	 */
 	private function _setSession($user)
 	{
 		$data = [
@@ -69,6 +75,9 @@ class Auth extends BaseController
 		return true;
 	}
 
+	/**
+	 * Method untuk logout/keluar
+	 */
 	public function logout()
 	{
 		session()->destroy();

@@ -15,6 +15,9 @@ class User extends BaseController
         $this->RoleModel = new RolesLevel();
     }
 
+    /**
+     * Menampilkan halaman index `user`
+     */
     public function index()
     {
         $items = $this->UserModel->getData();
@@ -26,6 +29,9 @@ class User extends BaseController
         return view('user/index', $data);
     }
 
+    /**
+     * Menambahkan data
+     */
     public function add()
     {
         $items = $this->RoleModel->getData();
@@ -90,7 +96,10 @@ class User extends BaseController
         return view('user/add', $data);
     }
 
-    public function delete($id)
+    /**
+     * Menghapus data
+     */
+    public function delete(int $id)
     {
         $this->UserModel->delData($id);
 
@@ -100,7 +109,11 @@ class User extends BaseController
         return redirect()->to('/user');
     }
 
-    public function edit(string $id)
+    /**
+     * Menampilkan data berdasarkan `user_id`
+     * di halaman view `/user/update`
+     */
+    public function edit(int $id)
     {
         $items = $this->RoleModel->getData();
         $user = $this->UserModel->getDataById($id);
@@ -113,6 +126,9 @@ class User extends BaseController
         return view('user/update', $data);
     }
 
+    /**
+     * Method update data
+     */
     public function update($id)
     {
         if ($this->request->getPost()) {
