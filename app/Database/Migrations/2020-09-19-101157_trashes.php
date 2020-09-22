@@ -47,7 +47,7 @@ class Trashes extends Migration
 		$this->forge->addPrimaryKey('id');
 		$this->forge->addForeignKey('trash_category_id', 'categories', 'id', 'CASCADE', 'CASCADE');
 		$this->forge->addForeignKey('floor_id', 'floors', 'id', 'CASCADE', 'CASCADE');
-		$this->forge->addForeignKey('user_id', 'users', 'id', 'CASCADE', 'CASCADE');
+		$this->forge->addForeignKey('user_id', 'users', 'user_id', 'CASCADE', 'CASCADE');
 		$this->forge->addForeignKey('shift_id', 'shifts', 'id', 'CASCADE', 'CASCADE');
 		$this->forge->createTable('trashes');
 	}

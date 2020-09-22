@@ -31,6 +31,7 @@
                 <p class="login-box-msg">Masuk untuk melanjutkan</p>
 
                 <form action="/" method="POST">
+                    <?= csrf_field() ?>
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" placeholder="ID Pegawai" name="employee_id" id="employee_id" value="<?= set_value('employee_id') ?>">
                         <div class="input-group-append">

@@ -15,13 +15,19 @@ class RolesLevel extends Migration
 				'unsigned' => true,
 				'auto_increment' => true
 			],
+			'role_level_id' => [
+				'type' => 'INT',
+				'constraint' => 5,
+				'unsigned' => true,
+			],
 			'role_name' => [
 				'type' => 'VARCHAR',
 				'constraint' => 50,
 			]
 		]);
-		
+
 		$this->forge->addPrimaryKey('id');
+		$this->forge->addUniqueKey('role_level_id');
 		$this->forge->createTable('roles_level');
 	}
 

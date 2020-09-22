@@ -44,4 +44,31 @@ class User extends Model
 
         return $data;
     }
+
+    public function getData()
+    {
+        return $this->db->table('users')
+            ->join('roles_level', 'roles_level.role_level_id = users.role_level_id')
+            ->orderBy('user_id', 'ASC')->get()->getResultArray();
+    }
+
+    public function delData($id)
+    {
+        $this->db->table('users')->delete(['user_id' => $id]);
+    }
+
+    public function getDataById($id)
+    {
+        return $this->where(['user_id' => $id])->first();
+    }
+
+    public function updateData(int $id, array $data)
+    {
+        extract($data);
+
+        $this->db->table('users')->where('user_id', $id)->update($data);
+        // $this->db->table('users')->update($data);
+
+        return true;
+    }
 }

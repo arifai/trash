@@ -47,7 +47,7 @@ class Auth extends BaseController
 				$user = $model->where('employee_id', $getEmployeeId)->first();
 				$this->_setSession($user);
 
-				return redirect()->to('dashboard/index');
+				return redirect()->to('dashboard');
 			}
 		}
 
@@ -57,7 +57,7 @@ class Auth extends BaseController
 	private function _setSession($user)
 	{
 		$data = [
-			'id' => $user['id'],
+			'user_id' => $user['user_id'],
 			'full_name' => $user['full_name'],
 			'employee_id' => $user['employee_id'],
 			'role_level_id' => $user['role_level_id'],

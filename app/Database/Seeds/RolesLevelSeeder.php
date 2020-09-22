@@ -10,9 +10,11 @@ class RolesLevelSeeder extends Seeder
 	{
 		$data = [
 			[
+				'role_level_id' => 1,
 				'role_name' => 'admin'
 			],
 			[
+				'role_level_id' => 2,
 				'role_name' => 'employee'
 			]
 		];
