@@ -40,13 +40,13 @@ $routes->get('dashboard', 'Dashboard::index');
 
 // User admin panel
 $routes->get('user', 'User::index');
-$routes->match(['get', 'post'], 'user/add', 'User::add');
+$routes->get('user/add', 'User::add');
 $routes->delete('user/(:num)', 'User::delete/$1');
 $routes->get('user/edit/(:segment)', 'User::edit/$1');
 
 // Trash admin panel
 $routes->get('trash', 'Trash::index');
-$routes->match(['get', 'post'], 'trash/add', 'Trash::add');
+$routes->get('trash/add', 'Trash::add');
 $routes->delete('trash/(:num)', 'Trash::delete/$1');
 $routes->get('trash/edit/(:segment)', 'Trash::edit/$1');
 

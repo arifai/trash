@@ -35,34 +35,30 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="full_name">Nama Lengkap</label>
-                                    <input type="text" class="form-control" id="full_name" name="full_name" placeholder="Nama Lengkap" value="<?= $user['full_name'] ?>">
+                                    <input type="text" class="form-control <?php if ($validation->hasError('full_name')) { echo 'is-invalid'; } ?>" id="full_name" name="full_name" placeholder="Nama Lengkap" value="<?= $user['full_name'] ?>">
+                                    <div class="invalid-feedback">
+                                        <?= $validation->getError('full_name') ?>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="employee_id">ID Pegawai</label>
-                                    <input type="text" class="form-control" id="employee_id" name="employee_id" placeholder="ID Pegawai" value="<?= $user['employee_id'] ?>">
+                                    <input type="text" class="form-control <?php if ($validation->hasError('employee_id')) { echo 'is-invalid'; } ?>" id="employee_id" name="employee_id" placeholder="ID Pegawai" value="<?= $user['employee_id'] ?>">
+                                    <div class="invalid-feedback">
+                                        <?= $validation->getError('employee_id') ?>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="role_level">Hak Akses</label>
-                                    <select class="custom-select" name="role_level">
+                                    <select class="custom-select <?php if ($validation->hasError('role_level')) { echo 'is-invalid'; } ?>" name="role_level">
+                                        <option value="">Pilih salah satu</option>
                                         <?php foreach ($items as $item) : ?>
-                                            <option <?php if ($item['role_level_id']  == $user['role_level_id']) {echo 'selected';} ?> value="<?= $item['role_level_id'] ?>"><?= $item['role_name'] ?></option>
+                                            <option <?php if ($item['role_level_id']  == $user['role_level_id']) { echo 'selected'; } ?> value="<?= $item['role_level_id'] ?>"><?= $item['role_name'] ?></option>
                                         <?php endforeach; ?>
                                     </select>
-                                </div>
-                                <!-- <div class="form-group">
-                                    <label for="password">Kata Sandi</label>
-                                    <input type="password" class="form-control" id="password" name="password" placeholder="Kata Sandi" value="<?= set_value('password') ?>">
-                                </div> -->
-
-                                <!-- Alert if validate errors -->
-                                <?php if (isset($validation)) : ?>
-                                    <div class="col-12">
-                                        <div class="alert alert-danger" role="alert">
-                                            <?= $validation->listErrors() ?>
-                                        </div>
+                                    <div class="invalid-feedback">
+                                        <?= $validation->getError('role_level') ?>
                                     </div>
-                                <?php endif; ?>
-
+                                </div>
                             </div>
                             <!-- .card-body -->
                             <div class="card-footer">
