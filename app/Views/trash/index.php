@@ -63,7 +63,7 @@
                                         <td class="text-capitalize"><?= $item['shift_name'] ?></td>
                                         <td class="text-capitalize"><?= $item['entry_time'] ?></td>
                                         <td>
-                                            <a href="/trash/edit/<?= $item['id'] ?>" class="btn btn-warning btn-sm">Perbarui</a>
+                                            <a href="/trash/update/<?= $item['id'] ?>" class="btn btn-warning btn-sm">Perbarui</a>
                                             <form action="/trash/<?= $item['id'] ?>" method="post" class="d-inline">
                                                 <?= csrf_field() ?>
                                                 <input type="hidden" name="_method" value="DELETE">

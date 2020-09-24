@@ -43,62 +43,67 @@ class Trash extends BaseController
             'floors' => $floors,
             'users' => $users,
             'shifts' => $shifts,
-            'cats' => $categories
+            'cats' => $categories,
+            'validation' => \Config\Services::validation()
         ];
 
-        if ($this->request->getPost()) {
-            $rules = [
-                'weight' => 'required|min_length[1]|max_length[4]',
-                'category_id' => 'required',
-                'floor_id' => 'required',
-                'user_id' => 'required',
-                'shift_id' => 'required'
-            ];
-
-            $errors = [
-                'weight' => [
-                    'required' => 'Berat tidak boleh kosong',
-                    'min_length' => 'Berat minimal berisikan 1 angka',
-                    'max_length' => 'Berat maksimal berisikan 4 angka',
-                    // 'decimal' => 'Berat harus berupa bilangan pecahan'
-                ],
-                'category_id' => [
-                    'required' => 'Kategori tidak boleh kosong'
-                ],
-                'floor_id' => [
-                    'required' => 'Lantai tidak boleh kosong'
-                ],
-                'user_id' => [
-                    'required' => 'Nama Pegawai tidak boleh kosong'
-                ],
-                'shift_id' => [
-                    'required' => 'Jadwal shift tidak boleh kosong'
-                ]
-            ];
-
-            $validate = $this->validate($rules, $errors);
-
-            if (!$validate) {
-                $data['validation'] = $this->validator;
-            } else {
-                $newData = [
-                    'weight' => floatval($this->request->getVar('weight')),
-                    'category_id' => $this->request->getVar('category_id'),
-                    'floor_id' => $this->request->getVar('floor_id'),
-                    'user_id' => $this->request->getVar('user_id'),
-                    'shift_id' => $this->request->getVar('shift_id'),
-                    'entry_time' => Time::now('Asia/Jakarta', 'en_US')
-                ];
-
-                $this->TrashModel->save($newData);
-                $session = session();
-                $session->setFlashdata('success', 'Data sampah berhasil ditambahkan');
-
-                return redirect()->to('/trash');
-            }
-        }
-
         return view('trash/add', $data);
+    }
+
+    public function save()
+    {
+        $rules = [
+            'weight' => 'required|min_length[1]|max_length[4]',
+            'category_id' => 'required',
+            'floor_id' => 'required',
+            'user_id' => 'required',
+            'shift_id' => 'required',
+        ];
+
+        $errors = [
+            'weight' => [
+                'required' => 'Berat tidak boleh kosong',
+                'min_length' => 'Berat minimal berisikan 1 angka',
+                'max_length' => 'Berat maksimal berisikan 4 angka',
+                // 'decimal' => 'Berat harus berupa bilangan pecahan'
+            ],
+            'category_id' => [
+                'required' => 'Kategori tidak boleh kosong'
+            ],
+            'floor_id' => [
+                'required' => 'Lantai tidak boleh kosong'
+            ],
+            'user_id' => [
+                'required' => 'Nama Pegawai tidak boleh kosong'
+            ],
+            'shift_id' => [
+                'required' => 'Jadwal shift tidak boleh kosong'
+            ]
+        ];
+
+        $validate = $this->validate($rules, $errors);
+
+        if (!$validate) {
+            // $data['validation'] = $this->validator;
+            $validation = \Config\Services::validation();
+
+            return redirect()->to('/trash/add')->withInput()->with('validation', $validation);
+        } else {
+            $newData = [
+                'weight' => floatval($this->request->getVar('weight')),
+                'category_id' => $this->request->getVar('category_id'),
+                'floor_id' => $this->request->getVar('floor_id'),
+                'user_id' => $this->request->getVar('user_id'),
+                'shift_id' => $this->request->getVar('shift_id'),
+                'entry_time' => Time::now('Asia/Jakarta', 'en_US')
+            ];
+
+            $this->TrashModel->save($newData);
+            $session = session();
+            $session->setFlashdata('success', 'Data sampah berhasil ditambahkan');
+
+            return redirect()->to('/trash');
+        }
     }
 
     public function delete(int $id)
@@ -125,6 +130,7 @@ class Trash extends BaseController
             'shifts' => $shifts,
             'cats' => $categories,
             'item' => $item,
+            'validation' => \Config\Services::validation()
         ];
 
         return view('trash/update', $data);
@@ -132,56 +138,56 @@ class Trash extends BaseController
 
     public function update(int $id)
     {
-        if ($this->request->getPost()) {
-            $rules = [
-                'weight' => 'required|min_length[1]|max_length[4]',
-                'category_id' => 'required',
-                'floor_id' => 'required',
-                'user_id' => 'required',
-                'shift_id' => 'required'
+        $rules = [
+            'weight' => 'required|min_length[1]|max_length[4]',
+            'category_id' => 'required',
+            'floor_id' => 'required',
+            'user_id' => 'required',
+            'shift_id' => 'required',
+        ];
+
+        $errors = [
+            'weight' => [
+                'required' => 'Berat tidak boleh kosong',
+                'min_length' => 'Berat minimal berisikan 1 angka',
+                'max_length' => 'Berat maksimal berisikan 4 angka',
+                // 'decimal' => 'Berat harus berupa bilangan pecahan'
+            ],
+            'category_id' => [
+                'required' => 'Kategori tidak boleh kosong'
+            ],
+            'floor_id' => [
+                'required' => 'Lantai tidak boleh kosong'
+            ],
+            'user_id' => [
+                'required' => 'Nama Pegawai tidak boleh kosong'
+            ],
+            'shift_id' => [
+                'required' => 'Jadwal shift tidak boleh kosong'
+            ]
+        ];
+
+        $validate = $this->validate($rules, $errors);
+
+        if (!$validate) {
+            $validation = \Config\Services::validation();
+
+            return redirect()->to('/trash/update/' . $id)->withInput()->with('validation', $validation);
+        } else {
+            $newData = [
+                'weight' => floatval($this->request->getVar('weight')),
+                'category_id' => $this->request->getVar('category_id'),
+                'floor_id' => $this->request->getVar('floor_id'),
+                'user_id' => $this->request->getVar('user_id'),
+                'shift_id' => $this->request->getVar('shift_id'),
+                // 'entry_time' => Time::now('Asia/Jakarta', 'en_US')
             ];
 
-            $errors = [
-                'weight' => [
-                    'required' => 'Berat tidak boleh kosong',
-                    'min_length' => 'Berat minimal berisikan 1 angka',
-                    'max_length' => 'Berat maksimal berisikan 4 angka',
-                    // 'decimal' => 'Berat harus berupa bilangan pecahan'
-                ],
-                'category_id' => [
-                    'required' => 'Kategori tidak boleh kosong'
-                ],
-                'floor_id' => [
-                    'required' => 'Lantai tidak boleh kosong'
-                ],
-                'user_id' => [
-                    'required' => 'Nama Pegawai tidak boleh kosong'
-                ],
-                'shift_id' => [
-                    'required' => 'Jadwal shift tidak boleh kosong'
-                ]
-            ];
+            $this->TrashModel->updateData($id, $newData);
+            $session = session();
+            $session->setFlashdata('success', 'Data sampah berhasil diperbarui');
 
-            $validate = $this->validate($rules, $errors);
-
-            if (!$validate) {
-                $data['validation'] = $this->validator;
-            } else {
-                $newData = [
-                    'weight' => floatval($this->request->getVar('weight')),
-                    'category_id' => $this->request->getVar('category_id'),
-                    'floor_id' => $this->request->getVar('floor_id'),
-                    'user_id' => $this->request->getVar('user_id'),
-                    'shift_id' => $this->request->getVar('shift_id'),
-                    // 'entry_time' => Time::now('Asia/Jakarta', 'en_US')
-                ];
-
-                $this->TrashModel->updateData($id, $newData);
-                $session = session();
-                $session->setFlashdata('success', 'Data sampah berhasil perbarui');
-
-                return redirect()->to('/trash');
-            }
+            return redirect()->to('/trash');
         }
     }
 }
