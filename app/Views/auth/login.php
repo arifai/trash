@@ -30,32 +30,30 @@
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Masuk untuk melanjutkan</p>
 
-                <form action="/" method="POST">
+                <form action="/auth/authorize" method="POST">
                     <?= csrf_field() ?>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="ID Pegawai" name="employee_id" id="employee_id" value="<?= set_value('employee_id') ?>">
+                        <input type="text" class="form-control <?php if ($validation->hasError('employee_id')) { echo 'is-invalid'; } ?>" placeholder="ID Pegawai" name="employee_id" id="employee_id" value="<?= set_value('employee_id') ?>">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-id-badge"></span>
                             </div>
                         </div>
+                        <div class="invalid-feedback">
+                            <?= $validation->getError('employee_id') ?>
+                        </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="Kata sandi" name="password" , id="password">
+                        <input type="password" class="form-control <?php if ($validation->hasError('password')) { echo 'is-invalid'; } ?>" placeholder="Kata sandi" name="password" , id="password">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
                             </div>
                         </div>
-                    </div>
-                    <!-- Alert if validate errors -->
-                    <?php if (isset($validation)) : ?>
-                        <div class="col-12">
-                            <div class="alert alert-danger" role="alert">
-                                <?= $validation->listErrors() ?>
-                            </div>
+                        <div class="invalid-feedback">
+                            <?= $validation->getError('password') ?>
                         </div>
-                    <?php endif; ?>
+                    </div>
                     <div class="row">
                         <div class="col-8">
                         </div>
