@@ -17,43 +17,51 @@ class Auth extends BaseController
 	 */
 	public function index()
 	{
-		$data = [];
-
-		if ($this->request->getPost()) {
-			$rules = [
-				'employee_id' => 'required|min_length[6]|max_length[8]|numeric',
-				'password' => 'required|min_length[8]|max_length[50]|validateUser[employee_id, password]'
-			];
-
-			$errors = [
-				'employee_id' => [
-					'required' => 'ID Pegawai tidak boleh kosong',
-					'min_length' => 'ID Pegawai minimal 6 angka',
-					'max_length' => 'ID Pegawai maksimal 8 angka',
-					'numeric' => 'ID Pegawai harus berisi angka'
-				],
-				'password' => [
-					'required' => 'Kata sandi tidak boleh kosong',
-					'min_length' => 'Kata sandi minimal 8 karakter',
-					'max_length' => 'Kata sandi maksimal 50 karakter',
-					'validateUser' => 'ID Pegawai atau kata sandi tidak ditemukan'
-				]
-			];
-
-			$validate = $this->validate($rules, $errors);
-
-			if (!$validate) {
-				$data['validation'] = $this->validator;
-			} else {
-				$getEmployeeId = $this->request->getVar('employee_id');
-				$user = $this->UserModel->where('employee_id', $getEmployeeId)->first();
-				$this->_setSession($user);
-
-				return redirect()->to('dashboard');
-			}
-		}
+		$data = [
+			'validation' => \Config\Services::validation()
+		];
 
 		return view('auth/login', $data);
+	}
+
+	/**
+	 * Method authorize yang berfungsi untuk handle login
+	 */
+	public function authorize()
+	{
+		$rules = [
+			'employee_id' => 'required|min_length[6]|max_length[8]|numeric',
+			'password' => 'required|min_length[8]|max_length[50]|validateUser[employee_id, password]'
+		];
+
+		$errors = [
+			'employee_id' => [
+				'required' => 'ID Pegawai tidak boleh kosong',
+				'min_length' => 'ID Pegawai minimal 6 angka',
+				'max_length' => 'ID Pegawai maksimal 8 angka',
+				'numeric' => 'ID Pegawai harus berisi angka'
+			],
+			'password' => [
+				'required' => 'Kata sandi tidak boleh kosong',
+				'min_length' => 'Kata sandi minimal 8 karakter',
+				'max_length' => 'Kata sandi maksimal 50 karakter',
+				'validateUser' => 'ID Pegawai atau kata sandi tidak ditemukan'
+			]
+		];
+
+		$validate = $this->validate($rules, $errors);
+
+		if (!$validate) {
+			$validation = \Config\Services::validation();
+
+			return redirect()->to('/')->withInput()->with('validation', $validation);
+		} else {
+			$getEmployeeId = $this->request->getVar('employee_id');
+			$user = $this->UserModel->where('employee_id', $getEmployeeId)->first();
+			$this->_setSession($user);
+
+			return redirect()->to('dashboard');
+		}
 	}
 
 	/**
