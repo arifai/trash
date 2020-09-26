@@ -39,93 +39,64 @@
                     <!-- /.card-header -->
                     <div class="card-body">
                         <table id="data_table" class="table table-bordered table-hover">
-                            <?php if (session()->get('role_level_id') == 1) : ?>
-                                <thead>
-                                    <tr role="row" class="odd">
-                                        <th>No.</th>
-                                        <th>Berat (Kg)</th>
-                                        <th>Kategori</th>
-                                        <th>Lantai</th>
-                                        <th>Nama Pegawai</th>
-                                        <th>Jadwal Shift</th>
-                                        <th>Waktu Timbang</th>
+                            <thead>
+                                <tr role="row" class="odd">
+                                    <th>No.</th>
+                                    <th>Berat (Kg)</th>
+                                    <th>Kategori</th>
+                                    <th>Lantai</th>
+                                    <th>Nama Pegawai</th>
+                                    <th>Jadwal Shift</th>
+                                    <th>Waktu Timbang</th>
+                                    <?php if (session()->get('role_level_id') == 1) : ?>
                                         <th>Tindakan</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php $num = 1 ?>
-                                    <?php foreach ($items as $item) : ?>
-                                        <tr>
-                                            <td><?= $num ?></td>
-                                            <td class="text-capitalize"><?= $item['weight'] ?></td>
-                                            <td class="text-capitalize"><?= $item['category_name'] ?></td>
-                                            <td class="text-capitalize"><?= $item['floor_name'] ?></td>
-                                            <td class="text-capitalize"><?= $item['full_name'] ?></td>
-                                            <td class="text-capitalize"><?= $item['shift_name'] ?></td>
-                                            <td class="text-capitalize"><?= $item['entry_time'] ?></td>
+                                    <?php endif; ?>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php $num = 1 ?>
+                                <?php foreach ($items as $item) : ?>
+                                    <tr>
+                                        <td><?= $num ?></td>
+                                        <td class="text-capitalize"><?= $item['weight'] ?></td>
+                                        <td class="text-capitalize"><?= $item['category_name'] ?></td>
+                                        <td class="text-capitalize"><?= $item['floor_name'] ?></td>
+                                        <td class="text-capitalize"><?= $item['full_name'] ?></td>
+                                        <td class="text-capitalize"><?= $item['shift_name'] ?></td>
+                                        <td class="text-capitalize"><?= $item['entry_time'] ?></td>
+                                        <?php if (session()->get('role_level_id') == 1) : ?>
                                             <td>
                                                 <a href="/trash/edit/<?= $item['id'] ?>" class="btn btn-warning btn-sm">Perbarui</a>
+                                                <form action="/trash/toTrashOut/<?= $item['id'] ?>" method="post" class="d-inline">
+                                                    <?= csrf_field() ?>
+                                                    <input type="hidden" name="_method" value="POST">
+                                                    <button type="submit" class="btn btn-success btn-sm inline" onclick="return confirm('Data ini akan dipindahkan ke menu Data Sampah Keluar. Apakah anda yakin?')">Keluarkan</button>
+                                                </form>
                                                 <form action="/trash/<?= $item['id'] ?>" method="post" class="d-inline">
                                                     <?= csrf_field() ?>
                                                     <input type="hidden" name="_method" value="DELETE">
                                                     <button type="submit" class="btn btn-danger btn-sm inline" onclick="return confirm('Apakah anda yakin?')">Hapus</button>
                                                 </form>
                                             </td>
-                                        </tr>
-                                        <?php $num++ ?>
-                                    <?php endforeach; ?>
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>No.</th>
-                                        <th>Berat (Kg)</th>
-                                        <th>Kategori</th>
-                                        <th>Lantai</th>
-                                        <th>Nama Pegawai</th>
-                                        <th>Jadwal Shift</th>
-                                        <th>Waktu Timbang</th>
+                                        <?php endif; ?>
+                                    </tr>
+                                    <?php $num++ ?>
+                                <?php endforeach; ?>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Berat (Kg)</th>
+                                    <th>Kategori</th>
+                                    <th>Lantai</th>
+                                    <th>Nama Pegawai</th>
+                                    <th>Jadwal Shift</th>
+                                    <th>Waktu Timbang</th>
+                                    <?php if (session()->get('role_level_id') == 1) : ?>
                                         <th>Tindakan</th>
-                                    </tr>
-                                </tfoot>
-                            <?php else : ?>
-                                <thead>
-                                    <tr role="row" class="odd">
-                                        <th>No.</th>
-                                        <th>Berat (Kg)</th>
-                                        <th>Kategori</th>
-                                        <th>Lantai</th>
-                                        <th>Nama Pegawai</th>
-                                        <th>Jadwal Shift</th>
-                                        <th>Waktu Timbang</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php $num = 1 ?>
-                                    <?php foreach ($items as $item) : ?>
-                                        <tr>
-                                            <td><?= $num ?></td>
-                                            <td class="text-capitalize"><?= $item['weight'] ?></td>
-                                            <td class="text-capitalize"><?= $item['category_name'] ?></td>
-                                            <td class="text-capitalize"><?= $item['floor_name'] ?></td>
-                                            <td class="text-capitalize"><?= $item['full_name'] ?></td>
-                                            <td class="text-capitalize"><?= $item['shift_name'] ?></td>
-                                            <td class="text-capitalize"><?= $item['entry_time'] ?></td>
-                                        </tr>
-                                        <?php $num++ ?>
-                                    <?php endforeach; ?>
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>No.</th>
-                                        <th>Berat (Kg)</th>
-                                        <th>Kategori</th>
-                                        <th>Lantai</th>
-                                        <th>Nama Pegawai</th>
-                                        <th>Jadwal Shift</th>
-                                        <th>Waktu Timbang</th>
-                                    </tr>
-                                </tfoot>
-                            <?php endif; ?>
+                                    <?php endif; ?>
+                                </tr>
+                            </tfoot>
                         </table>
                     </div>
                     <!-- /.card-body -->

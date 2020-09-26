@@ -56,9 +56,7 @@ class Trash extends BaseController
             'weight' => 'required|min_length[1]|max_length[6]',
             'category_id' => 'required',
             'floor_id' => 'required',
-            // 'user_id' => 'required',
             'shift_id' => 'required',
-            'is_out' => 'required',
         ];
 
         $errors = [
@@ -66,7 +64,6 @@ class Trash extends BaseController
                 'required' => 'Berat tidak boleh kosong',
                 'min_length' => 'Berat minimal berisikan 1 angka',
                 'max_length' => 'Berat maksimal berisikan 6 angka',
-                // 'decimal' => 'Berat harus berupa bilangan pecahan'
             ],
             'category_id' => [
                 'required' => 'Kategori tidak boleh kosong'
@@ -74,15 +71,9 @@ class Trash extends BaseController
             'floor_id' => [
                 'required' => 'Lantai tidak boleh kosong'
             ],
-            // 'user_id' => [
-            //     'required' => 'Nama Pegawai tidak boleh kosong'
-            // ],
             'shift_id' => [
                 'required' => 'Jadwal shift tidak boleh kosong'
             ],
-            'is_out' => [
-                'required' => 'Sampah keluar tidak boleh kosong'
-            ]
         ];
 
         $validate = $this->validate($rules, $errors);
@@ -99,7 +90,7 @@ class Trash extends BaseController
                 'floor_id' => $this->request->getVar('floor_id'),
                 'user_id' => session()->get('user_id'),
                 'shift_id' => $this->request->getVar('shift_id'),
-                'is_out' => $this->request->getVar('is_out'),
+                'is_out' => 1,
                 'entry_time' => Time::now('Asia/Jakarta', 'en_US')
             ];
 
@@ -107,7 +98,7 @@ class Trash extends BaseController
             $session = session();
             $session->setFlashdata('success', 'Data sampah berhasil ditambahkan');
 
-            return redirect()->to('/trash');
+            return redirect()->to('/trashes');
         }
     }
 
@@ -118,7 +109,7 @@ class Trash extends BaseController
         $session = session();
         $session->setFlashdata('success', 'Data sampah berhasil dihapus');
 
-        return redirect()->to('/trash');
+        return redirect()->to('/trashes');
     }
 
     public function delDataOut(int $id)
@@ -133,7 +124,6 @@ class Trash extends BaseController
 
     public function edit(int $id)
     {
-        // $users = $this->UserModel->getData();
         $floors = $this->FloorModel->getData();
         $shifts = $this->ShiftModel->getData();
         $categories = $this->CategoryModel->getData();
@@ -141,7 +131,6 @@ class Trash extends BaseController
         $data = [
             'title' => 'Tambah Data Sampah',
             'floors' => $floors,
-            // 'users' => $users,
             'shifts' => $shifts,
             'cats' => $categories,
             'item' => $item,
@@ -157,9 +146,7 @@ class Trash extends BaseController
             'weight' => 'required|min_length[1]|max_length[6]',
             'category_id' => 'required',
             'floor_id' => 'required',
-            // 'user_id' => 'required',
             'shift_id' => 'required',
-            'is_out' => 'required',
         ];
 
         $errors = [
@@ -167,7 +154,6 @@ class Trash extends BaseController
                 'required' => 'Berat tidak boleh kosong',
                 'min_length' => 'Berat minimal berisikan 1 angka',
                 'max_length' => 'Berat maksimal berisikan 6 angka',
-                // 'decimal' => 'Berat harus berupa bilangan pecahan'
             ],
             'category_id' => [
                 'required' => 'Kategori tidak boleh kosong'
@@ -178,9 +164,6 @@ class Trash extends BaseController
             'shift_id' => [
                 'required' => 'Jadwal shift tidak boleh kosong'
             ],
-            'is_out' => [
-                'required' => 'Sampah keluar tidak boleh kosong'
-            ]
         ];
 
         $validate = $this->validate($rules, $errors);
@@ -194,18 +177,26 @@ class Trash extends BaseController
                 'weight' => floatval($this->request->getVar('weight')),
                 'category_id' => $this->request->getVar('category_id'),
                 'floor_id' => $this->request->getVar('floor_id'),
-                // 'user_id' => $this->request->getVar('user_id'),
                 'shift_id' => $this->request->getVar('shift_id'),
-                'is_out' => $this->request->getVar('is_out'),
-                // 'entry_time' => Time::now('Asia/Jakarta', 'en_US')
             ];
 
             $this->TrashModel->updateData($id, $newData);
             $session = session();
             $session->setFlashdata('success', 'Data sampah berhasil diperbarui');
 
-            return redirect()->to('/trash');
+            return redirect()->to('/trashes');
         }
+    }
+
+    public function toTrashOut(int $id)
+    {
+        $newData = ['is_out' => 0];
+
+        $this->TrashModel->updateData($id, $newData);
+        $session = session();
+        $session->setFlashdata('success', 'Data sampah berhasil diperbarui');
+
+        return redirect()->to('/trashes');
     }
 
     public function out()

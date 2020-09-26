@@ -76,17 +76,6 @@
                                         <?= $validation->getError('shift_id') ?>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="is_out">Sampah Keluar?</label>
-                                    <select class="custom-select <?php if ($validation->hasError('is_out')) { echo 'is-invalid'; } ?>" name="is_out">
-                                        <option value="">Pilih salah satu</option>
-                                        <option value="0">Ya</option>
-                                        <option value="1">Tidak</option>
-                                    </select>
-                                    <div class="invalid-feedback">
-                                        <?= $validation->getError('is_out') ?>
-                                    </div>
-                                </div>
                             </div>
                             <!-- .card-body -->
                             <div class="card-footer">

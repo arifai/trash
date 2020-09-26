@@ -45,7 +45,7 @@ $routes->delete('user/(:num)', 'User::delete/$1', ['filter' => 'not_auth']);
 $routes->get('user/edit/(:segment)', 'User::edit/$1', ['filter' => 'not_auth']);
 
 // Trash admin panel
-$routes->get('trash', 'Trash::index', ['filter' => 'not_auth']);
+$routes->get('trashes', 'Trash::index', ['filter' => 'not_auth']);
 $routes->get('trash/out', 'Trash::out', ['filter' => 'not_auth']);
 $routes->get('trash/add', 'Trash::add', ['filter' => 'not_auth']);
 $routes->delete('trash/(:num)', 'Trash::delete/$1', ['filter' => 'not_auth']);
