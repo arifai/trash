@@ -34,14 +34,14 @@ class Trash extends BaseController
 
     public function add()
     {
-        $users = $this->UserModel->getData();
+        // $users = $this->UserModel->getData();
         $floors = $this->FloorModel->getData();
         $shifts = $this->ShiftModel->getData();
         $categories = $this->CategoryModel->getData();
         $data = [
             'title' => 'Tambah Data Sampah',
             'floors' => $floors,
-            'users' => $users,
+            // 'users' => $users,
             'shifts' => $shifts,
             'cats' => $categories,
             'validation' => \Config\Services::validation()
@@ -53,18 +53,19 @@ class Trash extends BaseController
     public function save()
     {
         $rules = [
-            'weight' => 'required|min_length[1]|max_length[4]',
+            'weight' => 'required|min_length[1]|max_length[6]',
             'category_id' => 'required',
             'floor_id' => 'required',
-            'user_id' => 'required',
+            // 'user_id' => 'required',
             'shift_id' => 'required',
+            'is_out' => 'required',
         ];
 
         $errors = [
             'weight' => [
                 'required' => 'Berat tidak boleh kosong',
                 'min_length' => 'Berat minimal berisikan 1 angka',
-                'max_length' => 'Berat maksimal berisikan 4 angka',
+                'max_length' => 'Berat maksimal berisikan 6 angka',
                 // 'decimal' => 'Berat harus berupa bilangan pecahan'
             ],
             'category_id' => [
@@ -73,11 +74,14 @@ class Trash extends BaseController
             'floor_id' => [
                 'required' => 'Lantai tidak boleh kosong'
             ],
-            'user_id' => [
-                'required' => 'Nama Pegawai tidak boleh kosong'
-            ],
+            // 'user_id' => [
+            //     'required' => 'Nama Pegawai tidak boleh kosong'
+            // ],
             'shift_id' => [
                 'required' => 'Jadwal shift tidak boleh kosong'
+            ],
+            'is_out' => [
+                'required' => 'Sampah keluar tidak boleh kosong'
             ]
         ];
 
@@ -93,8 +97,9 @@ class Trash extends BaseController
                 'weight' => floatval($this->request->getVar('weight')),
                 'category_id' => $this->request->getVar('category_id'),
                 'floor_id' => $this->request->getVar('floor_id'),
-                'user_id' => $this->request->getVar('user_id'),
+                'user_id' => session()->get('user_id'),
                 'shift_id' => $this->request->getVar('shift_id'),
+                'is_out' => $this->request->getVar('is_out'),
                 'entry_time' => Time::now('Asia/Jakarta', 'en_US')
             ];
 
@@ -116,9 +121,19 @@ class Trash extends BaseController
         return redirect()->to('/trash');
     }
 
+    public function delDataOut(int $id)
+    {
+        $this->TrashModel->delData($id);
+
+        $session = session();
+        $session->setFlashdata('success', 'Data sampah keluar berhasil dihapus');
+
+        return redirect()->to('/trash/out');
+    }
+
     public function edit(int $id)
     {
-        $users = $this->UserModel->getData();
+        // $users = $this->UserModel->getData();
         $floors = $this->FloorModel->getData();
         $shifts = $this->ShiftModel->getData();
         $categories = $this->CategoryModel->getData();
@@ -126,7 +141,7 @@ class Trash extends BaseController
         $data = [
             'title' => 'Tambah Data Sampah',
             'floors' => $floors,
-            'users' => $users,
+            // 'users' => $users,
             'shifts' => $shifts,
             'cats' => $categories,
             'item' => $item,
@@ -139,18 +154,19 @@ class Trash extends BaseController
     public function update(int $id)
     {
         $rules = [
-            'weight' => 'required|min_length[1]|max_length[4]',
+            'weight' => 'required|min_length[1]|max_length[6]',
             'category_id' => 'required',
             'floor_id' => 'required',
-            'user_id' => 'required',
+            // 'user_id' => 'required',
             'shift_id' => 'required',
+            'is_out' => 'required',
         ];
 
         $errors = [
             'weight' => [
                 'required' => 'Berat tidak boleh kosong',
                 'min_length' => 'Berat minimal berisikan 1 angka',
-                'max_length' => 'Berat maksimal berisikan 4 angka',
+                'max_length' => 'Berat maksimal berisikan 6 angka',
                 // 'decimal' => 'Berat harus berupa bilangan pecahan'
             ],
             'category_id' => [
@@ -159,11 +175,11 @@ class Trash extends BaseController
             'floor_id' => [
                 'required' => 'Lantai tidak boleh kosong'
             ],
-            'user_id' => [
-                'required' => 'Nama Pegawai tidak boleh kosong'
-            ],
             'shift_id' => [
                 'required' => 'Jadwal shift tidak boleh kosong'
+            ],
+            'is_out' => [
+                'required' => 'Sampah keluar tidak boleh kosong'
             ]
         ];
 
@@ -178,8 +194,9 @@ class Trash extends BaseController
                 'weight' => floatval($this->request->getVar('weight')),
                 'category_id' => $this->request->getVar('category_id'),
                 'floor_id' => $this->request->getVar('floor_id'),
-                'user_id' => $this->request->getVar('user_id'),
+                // 'user_id' => $this->request->getVar('user_id'),
                 'shift_id' => $this->request->getVar('shift_id'),
+                'is_out' => $this->request->getVar('is_out'),
                 // 'entry_time' => Time::now('Asia/Jakarta', 'en_US')
             ];
 
@@ -189,5 +206,16 @@ class Trash extends BaseController
 
             return redirect()->to('/trash');
         }
+    }
+
+    public function out()
+    {
+        $items = $this->TrashModel->getDataOut();
+        $data = [
+            'title' => 'Data Sampah Keluar',
+            'items' => $items
+        ];
+
+        return view('trash/out', $data);
     }
 }

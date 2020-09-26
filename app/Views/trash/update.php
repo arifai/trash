@@ -65,18 +65,6 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="user_id">Nama Pegawai</label>
-                                    <select class="custom-select <?php if ($validation->hasError('user_id')) { echo 'is-invalid'; } ?>" name="user_id">
-                                        <option value="">Pilih salah satu</option>
-                                        <?php foreach ($users as $user) : ?>
-                                            <option <?php if ($user['user_id'] == $item['user_id']) echo 'selected' ?> value="<?= $user['id'] ?>"><?= $user['full_name'] ?></option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                    <div class="invalid-feedback">
-                                        <?= $validation->getError('user_id') ?>
-                                    </div>
-                                </div>
-                                <div class="form-group">
                                     <label for="shift_id">Jadwal Shift</label>
                                     <select class="custom-select <?php if ($validation->hasError('shift_id')) { echo 'is-invalid'; } ?>" name="shift_id">
                                         <option value="">Pilih salah satu</option>
@@ -86,6 +74,17 @@
                                     </select>
                                     <div class="invalid-feedback">
                                         <?= $validation->getError('shift_id') ?>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="is_out">Sampah Keluar?</label>
+                                    <select class="custom-select <?php if ($validation->hasError('is_out')) { echo 'is-invalid'; } ?>" name="is_out">
+                                        <option value="">Pilih salah satu</option>
+                                        <option value="0">Ya</option>
+                                        <option value="1">Tidak</option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        <?= $validation->getError('is_out') ?>
                                     </div>
                                 </div>
                             </div>

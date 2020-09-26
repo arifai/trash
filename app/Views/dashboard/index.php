@@ -27,7 +27,33 @@ Untuk lebih jelas buka file 'app/Views/template.php'-->
     <div class="container-fluid">
         <!-- Info boxes -->
         <div class="row">
+            <!-- /.col -->
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box mb-3">
+                    <span class="info-box-icon bg-success elevation-1"><i class="fa fa-trash"></i></span>
+
+                    <div class="info-box-content">
+                        <span class="info-box-text">Sampah Masuk</span>
+                        <span class="info-box-number"><?= $in ?></span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
             <?php if (session()->get('role_level_id') == 1) : ?>
+                <div class="col-12 col-sm-6 col-md-3">
+                    <div class="info-box mb-3">
+                        <span class="info-box-icon bg-danger elevation-1"><i class="fa fa-minus-circle"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">Sampah Keluar</span>
+                            <span class="info-box-number"><?= $out ?></span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
                 <div class="col-12 col-sm-6 col-md-3">
                     <div class="info-box mb-3">
                         <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
@@ -41,20 +67,6 @@ Untuk lebih jelas buka file 'app/Views/template.php'-->
                     <!-- /.info-box -->
                 </div>
             <?php endif; ?>
-            <!-- /.col -->
-            <div class="col-12 col-sm-6 col-md-3">
-                <div class="info-box mb-3">
-                    <span class="info-box-icon bg-success elevation-1"><i class="fa fa-trash"></i></span>
-
-                    <div class="info-box-content">
-                        <span class="info-box-text">Total Sampah</span>
-                        <span class="info-box-number"><?= $trashes->countAllResults() ?></span>
-                    </div>
-                    <!-- /.info-box-content -->
-                </div>
-                <!-- /.info-box -->
-            </div>
-            <!-- /.col -->
         </div>
         <!-- /.row -->
     </div>

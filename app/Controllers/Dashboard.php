@@ -16,11 +16,13 @@ class Dashboard extends BaseController
     public function index()
     {
         $users = $this->UserModel;
-        $trashes = $this->TrashModel;
+        $trash_in = $this->TrashModel->countIn();
+        $trash_out = $this->TrashModel->countOut();
         $data = [
             'title' => 'Dashboard',
             'users' => $users,
-            'trashes' => $trashes
+            'in' => $trash_in,
+            'out' => $trash_out
         ];
 
         return view('dashboard/index', $data);

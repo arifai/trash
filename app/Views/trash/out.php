@@ -6,12 +6,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Daftar Sampah</h1>
+                <h1 class="m-0 text-dark">Data Sampah Keluar</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Data Sampah</li>
+                    <li class="breadcrumb-item active">Data Sampah Keluar</li>
                 </ol>
             </div><!-- /.col -->
         </div><!-- /.row -->
@@ -33,10 +33,6 @@
                 <?php endif; ?>
 
                 <div class="card">
-                    <div class="card-header">
-                        <button type="button" class="btn btn-primary btn-sm float-right" onclick="location.href='<?= base_url('trash/add') ?>'">Tambah Sampah</button>
-                    </div>
-                    <!-- /.card-header -->
                     <div class="card-body">
                         <table id="data_table" class="table table-bordered table-hover">
                             <?php if (session()->get('role_level_id') == 1) : ?>
@@ -64,8 +60,7 @@
                                             <td class="text-capitalize"><?= $item['shift_name'] ?></td>
                                             <td class="text-capitalize"><?= $item['entry_time'] ?></td>
                                             <td>
-                                                <a href="/trash/edit/<?= $item['id'] ?>" class="btn btn-warning btn-sm">Perbarui</a>
-                                                <form action="/trash/<?= $item['id'] ?>" method="post" class="d-inline">
+                                                <form action="/trash/out/<?= $item['id'] ?>" method="post" class="d-inline">
                                                     <?= csrf_field() ?>
                                                     <input type="hidden" name="_method" value="DELETE">
                                                     <button type="submit" class="btn btn-danger btn-sm inline" onclick="return confirm('Apakah anda yakin?')">Hapus</button>
