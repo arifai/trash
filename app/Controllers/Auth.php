@@ -60,7 +60,7 @@ class Auth extends BaseController
 			$user = $this->UserModel->where('employee_id', $getEmployeeId)->first();
 			$this->_setSession($user);
 
-			return redirect()->to('dashboard');
+			return redirect()->to('/dashboard');
 		}
 	}
 

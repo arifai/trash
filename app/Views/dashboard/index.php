@@ -27,18 +27,20 @@ Untuk lebih jelas buka file 'app/Views/template.php'-->
     <div class="container-fluid">
         <!-- Info boxes -->
         <div class="row">
-            <div class="col-12 col-sm-6 col-md-3">
-                <div class="info-box mb-3">
-                    <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
+            <?php if (session()->get('role_level_id') == 1) : ?>
+                <div class="col-12 col-sm-6 col-md-3">
+                    <div class="info-box mb-3">
+                        <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
 
-                    <div class="info-box-content">
-                        <span class="info-box-text">Pengguna</span>
-                        <span class="info-box-number"><?= $users->countAllResults() ?></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Pengguna</span>
+                            <span class="info-box-number"><?= $users->countAllResults() ?></span>
+                        </div>
+                        <!-- /.info-box-content -->
                     </div>
-                    <!-- /.info-box-content -->
+                    <!-- /.info-box -->
                 </div>
-                <!-- /.info-box -->
-            </div>
+            <?php endif; ?>
             <!-- /.col -->
             <div class="col-12 col-sm-6 col-md-3">
                 <div class="info-box mb-3">
