@@ -46,8 +46,10 @@ $routes->get('user/edit/(:segment)', 'User::edit/$1');
 
 // Trash admin panel
 $routes->get('trash', 'Trash::index');
+$routes->get('trash/out', 'Trash::out');
 $routes->get('trash/add', 'Trash::add');
 $routes->delete('trash/(:num)', 'Trash::delete/$1');
+$routes->delete('trash/out/(:num)', 'Trash::delDataOut/$1');
 $routes->get('trash/edit/(:segment)', 'Trash::edit/$1');
 
 /**

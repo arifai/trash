@@ -42,11 +42,17 @@
                             <p>Data Sampah</p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="<?= base_url('trash/out') ?>" class="nav-link">
+                            <i class="nav-icon fa fa-minus-circle"></i>
+                            <p>Data Sampah Keluar</p>
+                        </a>
+                    </li>
                 <?php else : ?>
                     <li class="nav-item">
                         <a href="<?= base_url('trash') ?>" class="nav-link">
                             <i class="nav-icon fa fa-trash"></i>
-                            <p>Sampah</p>
+                            <p>Data Sampah</p>
                         </a>
                     </li>
                 <?php endif; ?>

@@ -39,6 +39,9 @@ class Trashes extends Migration
 				'constraint' => 5,
 				'unsigned' => true
 			],
+			'is_out' => [
+				'type' => 'BOOLEAN'
+			],
 			'entry_time' => [
 				'type' => 'DATETIME'
 			]
