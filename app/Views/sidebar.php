@@ -23,34 +23,35 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
+                <?php $uri = service('uri') ?>
                 <li class="nav-item">
-                    <a href="<?= base_url('dashboard') ?>" class="nav-link">
+                    <a href="<?= base_url('dashboard') ?>" class="nav-link <?= ($uri->getSegment(1) == 'dashboard') ? 'active' : null ?>">
                         <i class="nav-icon fa fa-tachometer-alt"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
                 <?php if (session()->get('role_level_id') == 1) : ?>
                     <li class="nav-item">
-                        <a href="<?= base_url('user') ?>" class="nav-link">
+                        <a href="<?= base_url('user') ?>" class="nav-link <?= ($uri->getSegment(1) == 'user') ? 'active' : null ?>">
                             <i class="nav-icon fa fa-users"></i>
                             <p>Data Pengguna</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="<?= base_url('trash') ?>" class="nav-link">
+                        <a href="<?= base_url('trashes') ?>" class="nav-link <?= ($uri->getSegment(1) == 'trashes') ? 'active' : null ?>">
                             <i class="nav-icon fa fa-trash"></i>
                             <p>Data Sampah</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="<?= base_url('trash/out') ?>" class="nav-link">
+                        <a href="<?= base_url('trash/out') ?>" class="nav-link <?= ($uri->getSegment(2) == 'out') ? 'active' : null ?>">
                             <i class="nav-icon fa fa-minus-circle"></i>
                             <p>Data Sampah Keluar</p>
                         </a>
                     </li>
                 <?php else : ?>
                     <li class="nav-item">
-                        <a href="<?= base_url('trash') ?>" class="nav-link">
+                        <a <?= base_url('trashes') ?>" class="nav-link <?= ($uri->getSegment(1) == 'trashes') ? 'active' : null ?>">
                             <i class="nav-icon fa fa-trash"></i>
                             <p>Data Sampah</p>
                         </a>
