@@ -25,7 +25,7 @@ class Trash extends BaseController
     {
         $items = $this->TrashModel->getData();
         $data = [
-            'title' => 'Sampah',
+            'title' => 'Data Sampah',
             'items' => $items
         ];
 
@@ -172,7 +172,7 @@ class Trash extends BaseController
         if (!$validate) {
             $validation = \Config\Services::validation();
 
-            return redirect()->to('/trash/update/' . $id)->withInput()->with('validation', $validation);
+            return redirect()->to('/trash/edit/' . $id)->withInput()->with('validation', $validation);
         } else {
             $newData = [
                 'weight' => floatval($this->request->getVar('weight')),

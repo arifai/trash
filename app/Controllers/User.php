@@ -22,7 +22,7 @@ class User extends BaseController
     {
         $items = $this->UserModel->getData();
         $data = [
-            'title' => 'Pengguna',
+            'title' => 'Data Pengguna',
             'items' => $items
         ];
 
