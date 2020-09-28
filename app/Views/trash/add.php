@@ -35,7 +35,7 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="weight">Berat (Kg)</label>
-                                    <input type="number" class="form-control <?php if ($validation->hasError('weight')) { echo 'is-invalid'; } ?>" id="weight" name="weight" placeholder="Berat (Kg)" step=".1" value="<?= set_value('weight') ?>">
+                                    <input type="number" class="form-control <?php if ($validation->hasError('weight')) { echo 'is-invalid'; } ?>" id="weight" name="weight" placeholder="Berat (Kg)" step=".01" value="<?= set_value('weight') ?>">
                                     <div class="invalid-feedback">
                                         <?= $validation->getError('weight') ?>
                                     </div>

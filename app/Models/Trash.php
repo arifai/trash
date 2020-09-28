@@ -10,7 +10,10 @@ class Trash extends Model
 
     protected $allowedFields = ['weight', 'category_id', 'floor_id', 'user_id', 'shift_id', 'is_out', 'entry_time'];
 
-    public function getData()
+    /**
+     * Mengambil data berdasarkan id dari `trashes.is_out`
+     */
+    public function getData(int $id)
     {
         return $this->db->table('trashes')
             ->join('categories', 'categories.id = trashes.category_id', 'LEFT')
@@ -22,38 +25,30 @@ class Trash extends Model
             ->select('floors.floor_name')
             ->select('users.full_name')
             ->select('shifts.shift_name')
-            ->where('trashes.is_out', '1')
+            ->where('trashes.is_out', $id)
             ->orderBy('trashes.id', 'ASC')
             ->get()->getResultArray();
     }
 
-    public function getDataOut()
-    {
-        return $this->db->table('trashes')
-            ->join('categories', 'categories.id = trashes.category_id', 'LEFT')
-            ->join('floors', 'floors.id = trashes.floor_id', 'LEFT')
-            ->join('users', 'trashes.user_id = users.user_id', 'LEFT')
-            ->join('shifts', 'shifts.id = trashes.shift_id', 'LEFT')
-            ->select('trashes.*')
-            ->select('categories.category_name')
-            ->select('floors.floor_name')
-            ->select('users.full_name')
-            ->select('shifts.shift_name')
-            ->where('trashes.is_out', '0')
-            ->orderBy('trashes.id', 'ASC')
-            ->get()->getResultArray();
-    }
-
+    /**
+     * Hapus data berdasarkan `id`
+     */
     public function delData(int $id)
     {
         return $this->db->table('trashes')->delete(['id' => $id]);
     }
 
+    /**
+     * Mengambil data berdasarkan `id`
+     */
     public function getDataById(int $id)
     {
         return $this->where(['id' => $id])->first();
     }
 
+    /**
+     * Method untuk keperluan update data
+     */
     public function updateData(int $id, array $data)
     {
         extract($data);
@@ -63,13 +58,19 @@ class Trash extends Model
         return true;
     }
 
-    public function countIn()
+    /**
+     * Menghitung sampah keluar berdasarkan `is_out`
+     */
+    public function countIsOut(int $id)
     {
-        return $this->db->table('trashes')->where('is_out', '1')->countAllResults();
+        return $this->db->table('trashes')->where('is_out', $id)->countAllResults();
     }
 
-    public function countOut()
+    /**
+     * Menjumlahkan berat berdasarkan `category_id` dan `is_out`
+     */
+    public function sumWeighById(int $cat_id, int $is_out)
     {
-        return $this->db->table('trashes')->where('is_out', '0')->countAllResults();
+        return $this->selectSum('weight')->where(['category_id' => $cat_id, 'is_out' => $is_out])->get()->getResultArray();
     }
 }
