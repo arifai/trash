@@ -51,7 +51,7 @@
                     </li>
                 <?php else : ?>
                     <li class="nav-item">
-                        <a <?= base_url('trashes') ?>" class="nav-link <?= ($uri->getSegment(1) == 'trashes') ? 'active' : null ?>">
+                        <a href="<?= base_url('trashes') ?>" class="nav-link <?= ($uri->getSegment(1) == 'trashes') ? 'active' : null ?>">
                             <i class="nav-icon fa fa-trash"></i>
                             <p>Data Sampah</p>
                         </a>

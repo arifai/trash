@@ -34,7 +34,18 @@ Untuk lebih jelas buka file 'app/Views/template.php'-->
 
                     <div class="info-box-content">
                         <span class="info-box-text">Sampah Masuk</span>
-                        <span class="info-box-number"><?= $in ?></span>
+                        <?php foreach ($in_tajam as $t) : ?>
+                            <span class="info-box-number">Tajam: <?= ($t['weight'] == null) ? 0 : $t['weight'] ?> Kg</span>
+                        <?php endforeach; ?>
+                        <?php foreach ($in_jerigen as $j) : ?>
+                            <span class="info-box-number">Jerigen: <?= ($j['weight'] == null) ? 0 : $j['weight'] ?> Kg</span>
+                        <?php endforeach; ?>
+                        <?php foreach ($in_cair as $c) : ?>
+                            <span class="info-box-number">Cair: <?= ($c['weight'] == null) ? 0 : $c['weight'] ?> Kg</span>
+                        <?php endforeach; ?>
+                        <?php foreach ($in_padat as $p) : ?>
+                            <span class="info-box-number">Padat: <?= ($p['weight'] == null) ? 0 : $p['weight'] ?> Kg</span>
+                        <?php endforeach; ?>
                     </div>
                     <!-- /.info-box-content -->
                 </div>
@@ -48,7 +59,18 @@ Untuk lebih jelas buka file 'app/Views/template.php'-->
 
                         <div class="info-box-content">
                             <span class="info-box-text">Sampah Keluar</span>
-                            <span class="info-box-number"><?= $out ?></span>
+                            <?php foreach ($out_tajam as $ot) : ?>
+                                <span class="info-box-number">Tajam: <?= ($ot['weight'] == null) ? 0 : $ot['weight'] ?> Kg</span>
+                            <?php endforeach; ?>
+                            <?php foreach ($out_jerigen as $oj) : ?>
+                                <span class="info-box-number">Jerigen: <?= ($oj['weight'] == null) ? 0 : $oj['weight'] ?> Kg</span>
+                            <?php endforeach; ?>
+                            <?php foreach ($out_cair as $oc) : ?>
+                                <span class="info-box-number">Cair: <?= ($oc['weight'] == null) ? 0 : $oc['weight'] ?> Kg</span>
+                            <?php endforeach; ?>
+                            <?php foreach ($out_padat as $op) : ?>
+                                <span class="info-box-number">Padat: <?= ($op['weight'] == null) ? 0 : $op['weight'] ?> Kg</span>
+                            <?php endforeach; ?>
                         </div>
                         <!-- /.info-box-content -->
                     </div>

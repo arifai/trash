@@ -23,7 +23,7 @@ class Trash extends BaseController
 
     public function index()
     {
-        $items = $this->TrashModel->getData();
+        $items = $this->TrashModel->getData(1);
         $data = [
             'title' => 'Data Sampah',
             'items' => $items
@@ -201,7 +201,7 @@ class Trash extends BaseController
 
     public function out()
     {
-        $items = $this->TrashModel->getDataOut();
+        $items = $this->TrashModel->getData(0);
         $data = [
             'title' => 'Data Sampah Keluar',
             'items' => $items
