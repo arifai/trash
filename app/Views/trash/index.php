@@ -63,7 +63,7 @@
                                         <td class="text-capitalize"><?= $item['floor_name'] ?></td>
                                         <td class="text-capitalize"><?= $item['full_name'] ?></td>
                                         <td class="text-capitalize"><?= $item['shift_name'] ?></td>
-                                        <td class="text-capitalize"><?= $item['entry_time'] ?></td>
+                                        <td class="text-capitalize"><?= simple_datetime_parse($item['entry_time']) ?></td>
                                         <?php if (session()->get('role_level_id') == 1) : ?>
                                             <td>
                                                 <a href="/trash/edit/<?= $item['id'] ?>" class="btn btn-warning btn-sm">Perbarui</a>

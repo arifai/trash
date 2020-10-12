@@ -58,7 +58,7 @@
                                             <td class="text-capitalize"><?= $item['floor_name'] ?></td>
                                             <td class="text-capitalize"><?= $item['full_name'] ?></td>
                                             <td class="text-capitalize"><?= $item['shift_name'] ?></td>
-                                            <td class="text-capitalize"><?= $item['entry_time'] ?></td>
+                                            <td class="text-capitalize"><?= simple_datetime_parse($item['entry_time']) ?></td>
                                             <td>
                                                 <form action="/trash/out/<?= $item['id'] ?>" method="post" class="d-inline">
                                                     <?= csrf_field() ?>
