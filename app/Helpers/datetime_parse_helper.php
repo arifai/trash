@@ -3,8 +3,7 @@
 if (!function_exists('datetime_parse')) {
 
     /**
-     * Method ini akan membuat format tanggal dan waktu (WIB) Indonesia.
-     * Contoh hasil `Jumat, 17 Agustus 1945 14:50`
+     * Method ini akan membuat format tanggal dan waktu (WIB) Indonesia. Contoh hasil Jumat, 17 Agustus 1945 11:00 WIB
      */
     function datetime_parse($datetime)
     {
@@ -25,8 +24,7 @@ if (!function_exists('datetime_parse')) {
     }
 
     /**
-     * Method ini akan memformat tanggal, bulan, dan tahun saja.
-     * Contoh hasil `17 Agustus 1945`
+     * Method ini akan memformat tanggal, bulan, dan tahun saja. Contoh hasil 17 Agustus 1945
      */
     function simple_datetime_parse($datetime)
     {
