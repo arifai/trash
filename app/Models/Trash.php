@@ -83,12 +83,8 @@ class Trash extends Model
             ->join('categories', 'categories.id = trashes.category_id', 'LEFT')
             ->select('trashes.category_id, DATE(entry_time) AS dates, SUM(weight) AS weight')
             ->select('categories.category_name')
-            ->groupBy('DATE(entry_time)')
+            ->groupBy('category_id')
+            ->orderBy('entry_time', 'ASC')
             ->get()->getResultArray();
-
-        // $gas = $this->db->table('trashes')->select('DATE(entry_time) AS dates, SUM(weight) AS weight');
-        // $sel = $gas->groupBy('DATE(entry_time)')->get()->getResultArray();
-
-        // return $sel;
     }
 }
