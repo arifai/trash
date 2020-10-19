@@ -43,7 +43,7 @@ class Trashes extends Migration
 				'type' => 'BOOLEAN'
 			],
 			'entry_time' => [
-				'type' => 'DATETIME'
+				'type' => 'DATE'
 			]
 		]);
 

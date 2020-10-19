@@ -51,6 +51,7 @@ $routes->get('trash/add', 'Trash::add', ['filter' => 'not_auth']);
 $routes->delete('trash/(:num)', 'Trash::delete/$1', ['filter' => 'not_auth']);
 $routes->delete('trash/out/(:num)', 'Trash::delDataOut/$1', ['filter' => 'not_auth']);
 $routes->get('trash/edit/(:segment)', 'Trash::edit/$1', ['filter' => 'not_auth']);
+$routes->get('history', 'History::index', ['filter' => 'not_auth']);
 
 /**
  * --------------------------------------------------------------------

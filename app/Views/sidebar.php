@@ -49,6 +49,12 @@
                             <p>Data Sampah Keluar</p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="<?= base_url('history') ?>" class="nav-link <?= ($uri->getSegment(1) == 'history') ? 'active' : null ?>">
+                            <i class="nav-icon fa fa-history"></i>
+                            <p>Riwayat</p>
+                        </a>
+                    </li>
                 <?php else : ?>
                     <li class="nav-item">
                         <a href="<?= base_url('trashes') ?>" class="nav-link <?= ($uri->getSegment(1) == 'trashes') ? 'active' : null ?>">

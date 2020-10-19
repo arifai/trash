@@ -73,4 +73,22 @@ class Trash extends Model
     {
         return $this->selectSum('weight')->where(['category_id' => $cat_id, 'is_out' => $is_out])->get()->getResultArray();
     }
+
+    /**
+     * Get result trash by grouping result by date
+     */
+    public function history()
+    {
+        return $this->db->table('trashes')
+            ->join('categories', 'categories.id = trashes.category_id', 'LEFT')
+            ->select('trashes.category_id, DATE(entry_time) AS dates, SUM(weight) AS weight')
+            ->select('categories.category_name')
+            ->groupBy('DATE(entry_time)')
+            ->get()->getResultArray();
+
+        // $gas = $this->db->table('trashes')->select('DATE(entry_time) AS dates, SUM(weight) AS weight');
+        // $sel = $gas->groupBy('DATE(entry_time)')->get()->getResultArray();
+
+        // return $sel;
+    }
 }
