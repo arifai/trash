@@ -2,8 +2,8 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="#" class="brand-link">
-        <img src="<?= base_url('dist/img/AdminLTELogo.png') ?>" alt="Sampahku Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">Sampahku</span>
+        <img src="<?= base_url('dist/img/AdminLTELogo.png') ?>" alt="Limbahku Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light">Limbahku</span>
     </a>
 
     <!-- Sidebar -->
@@ -40,13 +40,13 @@
                     <li class="nav-item">
                         <a href="<?= base_url('trashes') ?>" class="nav-link <?= ($uri->getSegment(1) == 'trashes') ? 'active' : null ?>">
                             <i class="nav-icon fa fa-trash"></i>
-                            <p>Data Sampah</p>
+                            <p>Data Limbah</p>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="<?= base_url('trash/out') ?>" class="nav-link <?= ($uri->getSegment(2) == 'out') ? 'active' : null ?>">
                             <i class="nav-icon fa fa-minus-circle"></i>
-                            <p>Data Sampah Keluar</p>
+                            <p>Data Limbah Keluar</p>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -59,7 +59,7 @@
                     <li class="nav-item">
                         <a href="<?= base_url('trashes') ?>" class="nav-link <?= ($uri->getSegment(1) == 'trashes') ? 'active' : null ?>">
                             <i class="nav-icon fa fa-trash"></i>
-                            <p>Data Sampah</p>
+                            <p>Data Limbah</p>
                         </a>
                     </li>
                 <?php endif; ?>
