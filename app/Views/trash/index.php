@@ -6,12 +6,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Daftar Sampah</h1>
+                <h1 class="m-0 text-dark">Daftar Limbah</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Data Sampah</li>
+                    <li class="breadcrumb-item active">Data Limbah</li>
                 </ol>
             </div><!-- /.col -->
         </div><!-- /.row -->
@@ -34,7 +34,7 @@
 
                 <div class="card">
                     <div class="card-header">
-                        <button type="button" class="btn btn-primary btn-sm float-right" onclick="location.href='<?= base_url('trash/add') ?>'">Tambah Sampah</button>
+                        <button type="button" class="btn btn-primary btn-sm float-right" onclick="location.href='<?= base_url('trash/add') ?>'">Tambah Limbah</button>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -70,7 +70,7 @@
                                                 <form action="/trash/toTrashOut/<?= $item['id'] ?>" method="post" class="d-inline">
                                                     <?= csrf_field() ?>
                                                     <input type="hidden" name="_method" value="POST">
-                                                    <button type="submit" class="btn btn-success btn-sm inline" onclick="return confirm('Data ini akan dipindahkan ke menu Data Sampah Keluar. Apakah anda yakin?')">Keluarkan</button>
+                                                    <button type="submit" class="btn btn-success btn-sm inline" onclick="return confirm('Data ini akan dipindahkan ke menu Data Limbah Keluar. Apakah anda yakin?')">Keluarkan</button>
                                                 </form>
                                                 <form action="/trash/<?= $item['id'] ?>" method="post" class="d-inline">
                                                     <?= csrf_field() ?>
